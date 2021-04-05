@@ -44,15 +44,15 @@ public class DogRepository {
         return dogs;
     }
 
-    public List<Dog> findDogsByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber){
-        List<Dog> dogs = mongoTemplate.find(
+    public Dog findDogByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber){
+        Dog dog = mongoTemplate.findOne(
                 Query.query(
                         Criteria.where("name").is(name).and
                                 ("ownerName").is(ownerName).and
                                 ("ownerPhoneNumber").is(ownerPhoneNumber)
                 ), Dog.class
         );
-        return dogs;
+        return dog;
     }
 
 }
