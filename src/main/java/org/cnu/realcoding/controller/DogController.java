@@ -1,5 +1,6 @@
 package org.cnu.realcoding.controller;
 
+import com.mongodb.client.result.UpdateResult;
 import org.cnu.realcoding.domain.Dog;
 import org.cnu.realcoding.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,13 @@ public class DogController {
     public List<Dog> getDogsByNameAndOwnerNameAndOwnerPhoneNumber
             (@PathVariable String name, @PathVariable String ownerName, @PathVariable String ownerPhoneNumber){
         return dogManagementService.getDogsByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+    }
+
+    //kind 정보만 수정할 수 있는 API 구현
+    //어떤 강아지의 kind 정보를 수정할것인지 알기위해 unique 키인 세 정보를 이용해 강아지를 찾고, 그 강아지의 kind 정보를 바꿔주었다. 
+    @GetMapping("/dogs/updateKind/{name}/{ownerName}/{ownerPhoneNumber}")
+    public UpdateResult UpdateToKind( @PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, String kind) {
+        return dogManagementService.UpdateToKind(name, ownerName,ownerPhoneNumber,kind);
     }
 }
 
