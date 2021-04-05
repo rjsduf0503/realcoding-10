@@ -8,13 +8,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-//수업시간에 배운 적합한 HTTP METHOD를 선택할 것
-//name 만을 파라미터로 받는 API 구현
-//ownerName 만을 파라미터로 받는 API 구현
-//ownerPhoneNumber 만을 파라미터로 받는 API 구현
-//세 가지 파라미터를 모두 받아야만 하는 API 구현
-//API는 DB에 저장된 정보를 반환해야 함
-//존재하지 않을경우 XXX http status를 리턴
+
+
+
 @Repository
 public class DogRepository {
     @Autowired
@@ -48,5 +44,15 @@ public class DogRepository {
         return dogs;
     }
 
+    public List<Dog> findDogsByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber){
+        List<Dog> dogs = mongoTemplate.find(
+                Query.query(
+                        Criteria.where("name").is(name).and
+                                ("ownerName").is(ownerName).and
+                                ("ownerPhoneNumber").is(ownerPhoneNumber)
+                ), Dog.class
+        );
+        return dogs;
+    }
 
 }
