@@ -18,7 +18,6 @@ public class SwaggerConfig {
                 .select()
                 .build();
     }
-
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 .title("My First Spring Boot Project")
