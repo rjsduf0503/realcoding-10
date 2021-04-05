@@ -1,13 +1,14 @@
 package org.cnu.realcoding.service;
 
 import org.cnu.realcoding.domain.Dog;
+import org.cnu.realcoding.exception.DogAlreadyExistsException;
 import org.cnu.realcoding.exception.DogsNotFoundException;
 import org.cnu.realcoding.repository.DogRepository;
-import org.cnu.realcoding.exception.DogsNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class DogManagementService {
@@ -16,7 +17,10 @@ public class DogManagementService {
     private DogRepository dogRepository;
 
     public void insertDog(Dog dog) {
-        dogRepository.insertDog(dog);
+        if (dogRepository.findDogByNameAndOwnerNameAndOwnerPhoneNumber(dog.getName(), dog.getOwnerName(), dog.getOwnerPhoneNumber()) == null) {
+            dogRepository.insertDog(dog);
+        }
+        else throw new DogAlreadyExistsException();
     }
 
     public Dog getDogByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber) {
@@ -29,7 +33,7 @@ public class DogManagementService {
 
     //list가 빈 list인 경우 404뜨게 한다.
     public List<Dog> getDogByName(String name) {
-        List<Dog> dogs =  dogRepository.findDogByName(name);
+        List<Dog> dogs = dogRepository.findDogByName(name);
         if(dogs.isEmpty()) {
             throw new DogsNotFoundException();
         }
