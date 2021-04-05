@@ -1,5 +1,6 @@
 package org.cnu.realcoding.service;
 
+import com.mongodb.client.result.UpdateResult;
 import org.cnu.realcoding.domain.Dog;
 import org.cnu.realcoding.exception.DogsNotFoundException;
 import org.cnu.realcoding.repository.DogRepository;
@@ -50,6 +51,12 @@ public class DogManagementService {
             throw new DogsNotFoundException();
         }
         return dogs;
+    }
+
+    //kind 정보만 수정하는 API
+    public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
+        this.getDogsByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
+        return dogRepository.updateDogsFind(name, ownerName,ownerPhoneNumber,kind);
     }
 
 }
