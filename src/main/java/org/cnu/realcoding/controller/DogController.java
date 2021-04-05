@@ -22,8 +22,8 @@ public class DogController {
     }
 
     @GetMapping("/dogs/{name}/{ownerName}/{ownerPhoneNumber}")
-    public List<Dog> getDogsByNameAndOwnerNameAndOwnerPhoneNumber
+    public Dog getDogByNameAndOwnerNameAndOwnerPhoneNumber
             (@PathVariable String name, @PathVariable String ownerName, @PathVariable String ownerPhoneNumber){
-        return dogManagementService.getDogsByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+        return dogManagementService.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
     }
 }

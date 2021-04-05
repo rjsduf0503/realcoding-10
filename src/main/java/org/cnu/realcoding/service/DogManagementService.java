@@ -18,12 +18,12 @@ public class DogManagementService {
         dogRepository.insertDog(dog);
     }
 
-    public List<Dog> getDogsByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber){
-        List<Dog> dogs = dogRepository.findDogsByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
-        if(dogs.isEmpty()) {
+    public Dog getDogByNameAndOwnerNameAndOwnerPhoneNumber(String name, String ownerName, String ownerPhoneNumber){
+        Dog dog = dogRepository.findDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+        if(dog == null) {
             throw new DogsNotFoundException();
         }
-        return dogs;
+        return dog;
     }
 
 }
