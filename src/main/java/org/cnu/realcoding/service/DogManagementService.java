@@ -59,7 +59,7 @@ public class DogManagementService {
 
     //kind 정보만 수정하는 API
     public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
-        this.getDogsByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
+        this.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
         return dogRepository.updateDogsFind(name, ownerName,ownerPhoneNumber,kind);
     }
 
