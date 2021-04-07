@@ -4,6 +4,7 @@ import com.mongodb.client.result.UpdateResult;
 import org.cnu.realcoding.domain.Dog;
 import org.cnu.realcoding.service.DogManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,6 +45,13 @@ public class DogController {
     public Dog getDogByNameAndOwnerNameAndOwnerPhoneNumber
             (@PathVariable String name, @PathVariable String ownerName, @PathVariable String ownerPhoneNumber){
         return dogManagementService.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+    }
+
+    //  전체 정보 통째로 수정 API
+    //  Method : Put, Message : PathVariable, Resource : dogs
+    @PutMapping("/dogs/{name}/{kind}/{ownerName}/{ownerPhoneNumber}")
+    public UpdateResult UpdateAllArgs(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber){
+        return dogManagementService.UpdateAllArgs(name, ownerName, ownerPhoneNumber, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
     //kind 정보만 수정할 수 있는 API 구현
