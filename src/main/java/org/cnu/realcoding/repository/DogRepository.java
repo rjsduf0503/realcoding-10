@@ -57,6 +57,22 @@ public class DogRepository {
         return dog;
     }
 
+    //  통째로 강아지 정보를 덮어쓸 수 있는 API 구현
+    //  name, ownerName, ownerPhoneNumber 이 모두 같으면 통째로 업데이트 해준다.
+    public UpdateResult updateAllDogArgsExceptMedicalRecords(String name, String ownerName, String ownerPhoneNumber, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").is(name).and
+                ("ownerName").is(ownerName).and
+                ("ownerPhoneNumber").is(ownerPhoneNumber)
+        );
+        Update update = new Update();
+        update.set("name", newName);
+        update.set("kind", newKind);
+        update.set("ownerName", newOwnerName);
+        update.set("ownerPhoneNumber", newOwnerPhoneNumber);
+
+        return mongoTemplate.updateFirst(query, update, Dog.class);
+    }
 
     //kind 정보만 수정하는 API
     // name, ownerName, ownerPhoneNumber 정보를 이용해 dog을 찾고  kind정보를 업데이트 해준다.

@@ -31,6 +31,11 @@ public class DogManagementService {
         }
         return dog;
     }
+/*
+    private void getDogByAllArgs() {
+        Dog dog = dogRepository.findDogByNameAndOwnerNameAndOwnerPhoneNumber()
+    }
+    */
 
     //list가 빈 list인 경우 404뜨게 한다.
     public List<Dog> getDogByName(String name) {
@@ -55,6 +60,13 @@ public class DogManagementService {
             throw new DogsNotFoundException();
         }
         return dogs;
+    }
+
+    //  Find dog by name, ownerName, ownerPhoneNumber
+    //  Then update all Dog Args except MedicalRecords
+    public UpdateResult UpdateAllArgs(String name, String ownerName, String ownerPhoneNumber, String newName, String newKind, String newOwnerName, String newOwnerPhoneNumber){
+        this.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+        return dogRepository.updateAllDogArgsExceptMedicalRecords(name, ownerName, ownerPhoneNumber, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
     //kind 정보만 수정하는 API
