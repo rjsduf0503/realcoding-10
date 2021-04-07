@@ -65,6 +65,11 @@ public class DogManagementService {
         return dogRepository.updateAllDogArgsExceptMedicalRecords(name, ownerName, ownerPhoneNumber, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
+    //kind 정보만 수정하는 API
+    public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
+        this.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
+        return dogRepository.UpdateToKind(name, ownerName,ownerPhoneNumber,kind);
+    }
 
     //진료기록을 추가
     public UpdateResult addMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
@@ -73,11 +78,6 @@ public class DogManagementService {
             throw new DogsNotFoundException();
         }
         return dogRepository.addingMedicalRecord(name,ownerName,ownerPhoneNumber,medicalRecords);
-    }
-    //kind 정보만 수정하는 API
-    public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
-        this.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
-        return dogRepository.updateDogsFind(name, ownerName,ownerPhoneNumber,kind);
     }
 
 

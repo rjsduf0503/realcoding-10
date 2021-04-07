@@ -89,6 +89,20 @@ public class DogRepository {
         );
     }
 
+    //kind 정보만 수정하는 API
+    // name, ownerName, ownerPhoneNumber 정보를 이용해 dog을 찾고  kind정보를 업데이트 해준다.
+    public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
+        return mongoTemplate.updateFirst(
+                Query.query(
+                        Criteria.where("name").is(name).and
+                                ("ownerName").is(ownerName).and
+                                ("ownerPhoneNumber").is(ownerPhoneNumber)
+                ),
+                Update.update("kind",kind),
+                Dog.class
+        );
+    }
+
 
     public UpdateResult addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
         Criteria criteria = new Criteria("name");
