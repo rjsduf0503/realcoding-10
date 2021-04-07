@@ -3,6 +3,7 @@ package org.cnu.realcoding.repository;
 import com.mongodb.client.result.UpdateResult;
 import org.cnu.realcoding.domain.Dog;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -76,18 +77,13 @@ public class DogRepository {
 
 
 
-    public void addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
+    public UpdateResult addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
         Criteria criteria = new Criteria("name");
         criteria.is(name).and("ownername").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber);
-        Query query = new Query(criteria);
-        Update update = new Update();
-        List<String> existing_Record = mongoTemplate.findOne(query,Dog.class).getMedicalRecords();
+        Query query = new Query().addCriteria(criteria);
+        Update update = new Update().addToSet("medicalRecords",medicalRecords);
+        return mongoTemplate.updateFirst(query,update,Dog.class);
 
-        for(String s : medicalRecords){
-            existing_Record.add(s);
-        }
-        update.set("medicalRecords",existing_Record);
-        mongoTemplate.updateFirst(query,update,Dog.class);
     }
 
 
