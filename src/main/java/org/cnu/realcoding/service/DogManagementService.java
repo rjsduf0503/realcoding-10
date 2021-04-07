@@ -74,6 +74,11 @@ public class DogManagementService {
         }
         return dogRepository.addingMedicalRecord(name,ownerName,ownerPhoneNumber,medicalRecords);
     }
+    //kind 정보만 수정하는 API
+    public UpdateResult UpdateToKind(String name, String ownerName, String ownerPhoneNumber, String kind) {
+        this.getDogByNameAndOwnerNameAndOwnerPhoneNumber(name,ownerName,ownerPhoneNumber);
+        return dogRepository.updateDogsFind(name, ownerName,ownerPhoneNumber,kind);
+    }
 
 
 }
