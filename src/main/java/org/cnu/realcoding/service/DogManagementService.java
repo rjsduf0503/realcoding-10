@@ -72,7 +72,7 @@ public class DogManagementService {
     }
 
     //진료기록을 추가
-    public UpdateResult addMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
+    public UpdateResult addMedicalRecord(String name, String ownerName, String ownerPhoneNumber,String medicalRecords){
         Dog dog = dogRepository.findDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
         if (dog == null) {
             throw new DogsNotFoundException();

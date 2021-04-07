@@ -90,14 +90,13 @@ public class DogRepository {
     }
 
 
-    public UpdateResult addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
+    public UpdateResult addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber,String medicalRecords){
         Criteria criteria = new Criteria("name");
-        criteria.is(name).and("ownername").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber);
+        criteria.is(name).and("ownerName").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber);
         Query query = new Query().addCriteria(criteria);
         Update update = new Update().addToSet("medicalRecords",medicalRecords);
         return mongoTemplate.updateFirst(query,update,Dog.class);
 
     }
-
 
 }

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@RestController 
+@RestController
 public class DogController {
 
     @Autowired
@@ -19,7 +19,7 @@ public class DogController {
 
     @PostMapping("/dogs")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createDogs(@RequestBody Dog dog){ 
+    public void createDogs(@RequestBody Dog dog){
         dogManagementService.insertDog(dog);
     }
 
@@ -63,9 +63,8 @@ public class DogController {
 
 
     @PutMapping("dogs/medicalRecords/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecords}")
-    public UpdateResult addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable List<String> medicalRecords) {
+    public UpdateResult addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable String medicalRecords) {
         return dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecords);
     }
 
 }
-
