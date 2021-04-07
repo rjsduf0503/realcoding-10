@@ -75,4 +75,5 @@ public class DogManagementService {
         return dogRepository.addingMedicalRecord(name,ownerName,ownerPhoneNumber,medicalRecords);
     }
 
+
 }
