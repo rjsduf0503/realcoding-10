@@ -61,9 +61,10 @@ public class DogController {
         return dogManagementService.UpdateToKind(name, ownerName,ownerPhoneNumber,kind);
     }
 
+
     @PutMapping("dogs/medicalRecords/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecords}")
-    public void addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable List<String> medicalRecords) {
-        dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecords);
+    public UpdateResult addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable List<String> medicalRecords) {
+        return dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecords);
     }
 
 }
