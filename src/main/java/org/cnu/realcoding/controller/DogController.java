@@ -16,7 +16,7 @@ public class DogController {
     @Autowired
     private DogManagementService dogManagementService;
 
-    @PostMapping("/dogs") 
+    @PostMapping("/dogs")
     @ResponseStatus(HttpStatus.CREATED)
     public void createDogs(@RequestBody Dog dog){ 
         dogManagementService.insertDog(dog);
@@ -52,5 +52,11 @@ public class DogController {
     public UpdateResult UpdateToKind( @PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, String kind) {
         return dogManagementService.UpdateToKind(name, ownerName,ownerPhoneNumber,kind);
     }
+
+    @PutMapping("dogs/medicalRecords/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecords}")
+    public void addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable List<String> medicalRecords) {
+        dogManagementService.addMedicalRecord(name, ownerName, ownerPhoneNumber, medicalRecords);
+    }
+
 }
 

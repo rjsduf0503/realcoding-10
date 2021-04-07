@@ -71,4 +71,20 @@ public class DogRepository {
                 Dog.class
         );
     }
+
+    public void addingMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
+        Criteria criteria = new Criteria("name");
+        criteria.is(name).and("ownername").is(ownerName).and("ownerPhoneNumber").is(ownerPhoneNumber);
+        Query query = new Query(criteria);
+        Update update = new Update();
+        List<String> existing_Record = mongoTemplate.findOne(query,Dog.class).getMedicalRecords();
+
+        for(String s : medicalRecords){
+            existing_Record.add(s);
+        }
+        update.set("medicalRecords",existing_Record);
+        mongoTemplate.updateFirst(query,update,Dog.class);
+    }
+
+
 }

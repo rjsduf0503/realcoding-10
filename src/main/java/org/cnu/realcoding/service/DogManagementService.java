@@ -63,4 +63,13 @@ public class DogManagementService {
         return dogRepository.updateDogsFind(name, ownerName,ownerPhoneNumber,kind);
     }
 
+    //진료기록을 추가
+    public void addMedicalRecord(String name, String ownerName, String ownerPhoneNumber, List<String> medicalRecords){
+        Dog dog = dogRepository.findDogByNameAndOwnerNameAndOwnerPhoneNumber(name, ownerName, ownerPhoneNumber);
+        if (dog == null) {
+            throw new DogsNotFoundException();
+        }
+        dogRepository.addingMedicalRecord(name,ownerName,ownerPhoneNumber,medicalRecords);
+    }
+
 }
