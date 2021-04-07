@@ -54,12 +54,7 @@ public class DogController {
         return dogManagementService.UpdateAllArgs(name, ownerName, ownerPhoneNumber, newName, newKind, newOwnerName, newOwnerPhoneNumber);
     }
 
-    //kind 정보만 수정할 수 있는 API 구현
-    //어떤 강아지의 kind 정보를 수정할것인지 알기위해 unique 키인 세 정보를 이용해 강아지를 찾고, 그 강아지의 kind 정보를 바꿔주었다. 
-    @GetMapping("/dogs/updateKind/{name}/{ownerName}/{ownerPhoneNumber}")
-    public UpdateResult UpdateToKind( @PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, String kind) {
-        return dogManagementService.UpdateToKind(name, ownerName,ownerPhoneNumber,kind);
-    }
+
 
     @PutMapping("dogs/medicalRecords/{name}/{ownerName}/{ownerPhoneNumber}/{medicalRecords}")
     public void addMedicalRecord(@PathVariable String name, @PathVariable  String ownerName, @PathVariable  String ownerPhoneNumber, @PathVariable List<String> medicalRecords) {
